@@ -114,7 +114,7 @@ def parse_message(data:bytes):
         }
 
 if __name__ == '__main__':
-    print(make_discover('req-1','12345'))
+    print(make_discover('req-1',12345))
 
 
 
