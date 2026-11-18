@@ -67,7 +67,7 @@ class Discovery:
         sock_search=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
         sock_search.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
         sock_search.settimeout(0.5)
-        sock_search.sendto(msg_search,("255.255.255.255", self.disc_port))
+        sock_search.sendto(msg_search,("10.21.178.84", self.disc_port))
         start_time=time.time()
         while time.time() - start_time < timeout:
             try:
@@ -77,7 +77,7 @@ class Discovery:
             msg=parse_message(data)
             if msg is None:
                 continue
-            if msg["type"] != "discover_reply" or msg["reqId"] != reqId:
+            if msg["type"] != "discover_reply" or msg["reqId"] != reqId or msg["nodeId"] == self.node_id:
                 continue
             found=False
             for p in self.peers:
